@@ -13,7 +13,7 @@ This feature can break if assumptions about error message format are invalidated
 
 SOLUTION
 ========
-Assuming the compiler emits source and line number with errors and warnings then it is easy to fix.
+Assuming your compiler still emits source file and line number details with its error/warning messages then it's easy to fix.
 It is just a matter of filtering the (compiler, assembler etc.) output stream so that the IDE recognizes the format once more. 
 The IDE can then find/open a source file edit window move the cursor to the error/warning you clicked - just as it should do.
 This simple approach works for most IDE's. By adding a filter, you can restore the expected level of service this IDE feature.
@@ -22,14 +22,14 @@ DESCRIPTION OF DELIVERABLE
 ==========================
 This is an EXAMPLE NOT A GENERAL SOLUTION. The solution has two stages:
 
-     i) "configuring" a filter to do what you need 
-    ii) "inserting" the filter into the build chain
+     i) "configuring" a filter to do what YOU need 
+    ii) "inserting" the filter into YOUR build chain
 
 Configuring is achieved with a custom program. 
-Check and if necessary change armccOutputFilter.cpp supplied in this VS2019 solution. 
-Then use VS2019 to build (a custom) armccOutputFilter.exe.
+Check, and if necessary change armccOutputFilter.cpp supplied in this VS2019 solution. 
+Then use VS2019 to customize and build your own filter.exe.
 
-Inserting the filter is achieved with a command in the makefile, but you won't find the syntax in the nmake reference. 
+Inserting the filter is achieved with a command in the makefile, (but you won't find the syntax in the nmake reference). 
 It works by redirecting the compiler's stdout and stderr through a pipe to the filter's stdin. 
 
 Here's an example make/nmake line typical of what you might need:
@@ -71,6 +71,10 @@ The code should easily port anywhere.
 The construct " 2>&1 | filter " appended to the compiler invokation line will integrate 'filter.exe' in a makefile/batch build.
 This construct is supported across many platforms and shells, including windows and cygwin. 
 Some shells have an equivalent capability with another syntax. 
+
+Notice that the characters '>' '&' and '|' are all special characters in nmake, so they can only be used like this 
+in the context of a command. The nmake pre-processor is OK with this, but other make utilities might have differences in the 
+way that these special characters are handled, and they might require some magic (escape sequences).
 
 Every situation is different, and you may need to change the code to suit the compiler/build tool in use.
 For this reason the code has been kept very short and simple so it is easy to 'tweak'.
