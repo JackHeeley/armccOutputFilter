@@ -26,8 +26,8 @@ This is an EXAMPLE NOT A GENERAL SOLUTION. The solution has two stages:
     ii) "inserting" the filter into YOUR build chain
 
 Configuring is achieved with a custom program. 
-Check, and if necessary change armccOutputFilter.cpp supplied in this VS2019 solution. 
-Then use VS2019 to customize and build your own filter.exe.
+Check, and if necessary change armccOutputFilter.cpp supplied in this VS2022 solution. 
+Then use VS2022 to customize and build your own filter.exe.
 
 Inserting the filter is achieved with a command in the makefile, (but you won't find the syntax in the nmake reference). 
 It works by redirecting the compiler's stdout and stderr through a pipe to the filter's stdin. 
@@ -49,7 +49,7 @@ Note: armccOutputFilter.exe must be placed in the program path, or just drop it 
 LIMITATIONS
 ===========
 
-Copyright (c) 2006-2020 Jack Heeley, all rights reserved. https://github.com/JackHeeley/armccOutputFilter
+Copyright (c) 2006-2022 Jack Heeley, all rights reserved. https://github.com/JackHeeley/armccOutputFilter
 
     This program is free software : you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,8 +64,8 @@ Copyright (c) 2006-2020 Jack Heeley, all rights reserved. https://github.com/Jac
     You should have received a copy of the GNU General Public License
     along with this program.If not, see < http://www.gnu.org/licenses/ >.
  
-This material assumes that you can use VS2019 to build a native command line program to target your development platform.
-As delivered, the project is Visual Studio 2019 static-linked to use windows c++ runtime support.
+This material assumes that you can use VS2022 to build a native command line program to target your development platform.
+As delivered, the project is Visual Studio 2022 static-linked to use windows c++ runtime support.
 The code should easily port anywhere.
 
 The construct " 2>&1 | filter " appended to the compiler invokation line will integrate 'filter.exe' in a makefile/batch build.
